@@ -4,109 +4,118 @@
     box-sizing: border-box;
 }
 
+/* CSS Variables for Theme Toggling */
 :root {
-    --primary-bg: linear-gradient(135deg, #3b3f52 0%, #232027 100%);
-    --light-bg: linear-gradient(135deg, #b9cecd 0%, #dfd5d8 100%);
-    --btn-gradient: linear-gradient(45deg, #9fad9f, #425542);
-}
-
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: var(--primary-bg);
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
+    --bg-gradient: linear-gradient(135deg, #1e202b 0%, #140c1b 100%);
+    --panel-bg: rgba(255, 255, 255, 0.95);
+    --text-color: #333;
+    --adaptive-btn: #2d3748; /* Dark mode buttons */
+    --adaptive-text: #ffffff;
 }
 
 body.light-mode {
-    background: var(--light-bg);
+    --bg-gradient: linear-gradient(135deg, #bcebe8 0%, #f8eaef 100%);
+    --panel-bg: rgba(255, 255, 255, 0.98);
+    --adaptive-btn: #edf2f7; /* Light mode buttons */
+    --adaptive-text: #2d3748;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: var(--bg-gradient);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: background 0.3s ease;
 }
 
 .header {
-    background: rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(10px);
     padding: 15px 30px;
+    background: rgba(0, 0, 0, 0.2);
     display: flex;
     justify-content: space-between;
     align-items: center;
     color: white;
 }
 
-.logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
-.logo i {
-    margin-right: 8px;
-    color: #ffd700; /* Lightning bolt color */
-}
-
 .container {
     flex: 1;
     display: flex;
-    padding: 15px;
-    gap: 15px;
+    padding: 20px;
+    gap: 20px;
     overflow: hidden;
 }
 
 .editor-panel, .output-panel {
-    background: rgba(255, 255, 255, 0.95);
+    flex: 1;
+    background: var(--panel-bg);
     border-radius: 12px;
     padding: 15px;
-    flex: 1;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
-
-.panel-header {
-    color: #764ba2;
-    margin-bottom: 10px;
-    font-size: 1.1rem;
-    border-bottom: 2px solid #eee;
-    padding-bottom: 5px;
 }
 
 textarea, iframe {
     flex: 1;
+    width: 100%;
     border: 1px solid #ddd;
     border-radius: 8px;
-    padding: 10px;
-    background: #fff;
+    padding: 12px;
+    font-family: 'Consolas', monospace;
 }
 
+/* Button Styling */
 .button-group {
     display: flex;
     gap: 10px;
     margin-top: 15px;
-    flex-wrap: wrap;
 }
 
 button {
-    flex: 1;
-    padding: 10px;
+    padding: 10px 15px;
     border: none;
     border-radius: 6px;
-    background: var(--btn-gradient);
-    color: white;
-    font-weight: 600;
     cursor: pointer;
+    font-weight: 600;
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 8px; /* Space between FA icon and text */
-    transition: transform 0.2s;
+    gap: 8px;
+    transition: all 0.2s ease;
 }
 
-button:hover {
-    transform: translateY(-2px);
+/* 1. Run Button - Green */
+.btn-run {
+    background-color: #28a745;
+    color: white;
+}
+.btn-run:hover {
+    background-color: #218838;
+}
+
+/* 2. Clear Button - Red */
+.btn-clear {
+    background-color: #dc3545;
+    color: white;
+}
+.btn-clear:hover {
+    background-color: #c82333;
+}
+
+/* 3. Adaptive Buttons (Download & Preview) */
+.btn-adaptive {
+    background-color: var(--adaptive-btn);
+    color: var(--adaptive-text);
+}
+.btn-adaptive:hover {
+    filter: brightness(0.9);
 }
 
 .theme-toggle {
-    background: rgba(255,255,255,0.2);
+    background: transparent;
     border: 1px solid white;
+    color: white;
     width: 40px;
     height: 40px;
+    justify-content: center;
     border-radius: 50%;
 }
