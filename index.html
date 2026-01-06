@@ -3,18 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="DaMuazCode - Professional Online Code Editor">
     <title>DaMuazCode - Online Code Editor</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <a href="#main-content" class="skip-link">Skip to main content</a>
-
     <header class="header">
         <div class="logo"><i class="fas fa-bolt"></i> DaMuazCode</div>
         <nav class="controls">
-            <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
+            <button class="theme-toggle" id="themeToggle">
                 <i class="fas fa-moon" id="themeIcon"></i>
             </button>
             <select id="languageSelect">
@@ -25,26 +22,39 @@
         </nav>
     </header>
 
-    <main class="container" id="main-content">
+    <main class="container">
         <section class="editor-panel">
             <h2 class="panel-header">Code Editor</h2>
-            <textarea id="codeEditor" spellcheck="false" placeholder="Start coding here..."><!DOCTYPE html>
+            <textarea id="codeEditor" spellcheck="false"><!DOCTYPE html>
 <html>
+<head>
+    <style>h1{color: #667eea;}</style>
+</head>
 <body>
-    <h1>Hello Font Awesome!</h1>
+    <h1>Hello DaMuazCode!</h1>
+    <p>Try the buttons below.</p>
 </body>
 </html></textarea>
+            
             <div class="button-group">
-                <button id="runBtn"><i class="fas fa-play"></i> Run Code</button>
-                <button id="clearBtn"><i class="fas fa-eraser"></i> Clear</button>
-                <button id="downloadBtn"><i class="fas fa-file-download"></i> Download</button>
-                <button id="previewBtn"><i class="fas fa-window-restore"></i> Open Preview</button>
+                <button id="runBtn" class="btn-run">
+                    <i class="fas fa-play"></i> Run Code
+                </button>
+                <button id="clearBtn" class="btn-clear">
+                    <i class="fas fa-eraser"></i> Clear
+                </button>
+                <button id="downloadBtn" class="btn-adaptive">
+                    <i class="fas fa-download"></i> Download
+                </button>
+                <button id="previewBtn" class="btn-adaptive">
+                    <i class="fas fa-external-link-alt"></i> Preview
+                </button>
             </div>
         </section>
 
         <section class="output-panel">
             <h2 class="panel-header">Output</h2>
-            <iframe id="output" title="Code output preview"></iframe>
+            <iframe id="output"></iframe>
         </section>
     </main>
 
