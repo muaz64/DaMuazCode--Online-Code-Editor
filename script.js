@@ -2,15 +2,22 @@ const editor = document.getElementById('codeEditor');
 const output = document.getElementById('output');
 const themeToggle = document.getElementById('themeToggle');
 const themeIcon = document.getElementById('themeIcon');
+const languageSelect = document.getElementById('languageSelect');
 
-// Run code on load
-window.addEventListener('load', runCode);
+// --- 1. INITIALIZATION ---
+window.addEventListener('load', () => {
+    // Restore theme from local storage
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+        document.body.classList.add('light-mode');
+        themeIcon.classList.replace('fa-moon', 'fa-sun');
+    }
+    runCode();
+});
 
-// Theme Toggle Logic
+// --- 2. THEME TOGGLE LOGIC ---
 themeToggle.addEventListener('click', () => {
     const isLight = document.body.classList.toggle('light-mode');
-    
-    // Change Icon
     if (isLight) {
         themeIcon.classList.replace('fa-moon', 'fa-sun');
     } else {
@@ -20,7 +27,8 @@ themeToggle.addEventListener('click', () => {
     localStorage.setItem('theme', isLight ? 'light' : 'dark');
 });
 
-// Run Code Function
+// --- 3. CORE FUNCTIONS ---
+
 function runCode() {
     const code = editor.value;
     const outputDoc = output.contentWindow.document;
@@ -29,7 +37,6 @@ function runCode() {
     outputDoc.close();
 }
 
-// Clear Code Function
 function clearCode() {
     if(confirm("Are you sure you want to clear all code?")) {
         editor.value = '';
@@ -37,34 +44,45 @@ function clearCode() {
     }
 }
 
-// Download Code Function
 function downloadCode() {
     const code = editor.value;
     const blob = new Blob([code], { type: 'text/html' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'my-code.html';
+    a.download = 'da-muaz-code.html';
     a.click();
     URL.revokeObjectURL(url);
 }
 
-// Preview in New Window
 function openPreviewInNewWindow() {
-    const win = window.open();
-    win.document.write(editor.value);
-    win.document.close();
+    const win = window.open('', '_blank');
+    if (win) {
+        win.document.write(editor.value);
+        win.document.close();
+    } else {
+        alert('Please allow popups to use the Preview feature.');
+    }
 }
 
-// Button Click Listeners
+// --- 4. EVENT LISTENERS ---
+
 document.getElementById('runBtn').addEventListener('click', runCode);
 document.getElementById('clearBtn').addEventListener('click', clearCode);
 document.getElementById('downloadBtn').addEventListener('click', downloadCode);
 document.getElementById('previewBtn').addEventListener('click', openPreviewInNewWindow);
 
-// Keyboard Shortcut (Ctrl + Enter to run)
+// Update output automatically when language changes
+languageSelect.addEventListener('change', () => {
+    console.log(`Language changed to: ${languageSelect.value}`);
+    runCode();
+});
+
+// --- 5. KEYBOARD SHORTCUTS ---
+
 document.addEventListener('keydown', (e) => {
     if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+        e.preventDefault(); 
         runCode();
     }
 });
