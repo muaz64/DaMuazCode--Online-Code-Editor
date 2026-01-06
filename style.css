@@ -8,16 +8,22 @@
 :root {
     --bg-gradient: linear-gradient(135deg, #1e202b 0%, #010102 100%);
     --panel-bg: rgba(255, 255, 255, 0.95);
+    --panel-header: #1e202b;
     --text-color: #333;
-    --adaptive-btn: #2d3748; /* Dark mode buttons */
+    /* Adaptive Button Defaults (Dark Mode) */
+    --adaptive-btn: #2d3748; 
     --adaptive-text: #ffffff;
+    --adaptive-hover: #4a5568;
 }
 
 body.light-mode {
     --bg-gradient: linear-gradient(135deg, #bcebe8 0%, #f8eaef 100%);
-    --panel-bg: rgba(255, 255, 255, 0.98);
-    --adaptive-btn: #edf2f7; /* Light mode buttons */
+    --panel-bg: #ffffff;
+    --panel-header: #667eea;
+    /* Adaptive Button Defaults (Light Mode) */
+    --adaptive-btn: #e2e8f0; 
     --adaptive-text: #2d3748;
+    --adaptive-hover: #cbd5e0;
 }
 
 body {
@@ -26,7 +32,7 @@ body {
     height: 100vh;
     display: flex;
     flex-direction: column;
-    transition: background 0.3s ease;
+    transition: background 0.4s ease;
 }
 
 .header {
@@ -53,8 +59,30 @@ body {
     padding: 15px;
     display: flex;
     flex-direction: column;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
 }
 
+.panel-top {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;           
+    margin-bottom: 15px;           
+}
+
+.panel-header {
+    margin-bottom: 0;             
+    font-size: 1.2rem;
+    color: var(--panel-header);
+}
+
+.lang-dropdown {
+    padding: 5px 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    background-color: white;
+    cursor: pointer;
+    outline: none;
+}
 textarea, iframe {
     flex: 1;
     width: 100%;
@@ -62,6 +90,11 @@ textarea, iframe {
     border-radius: 8px;
     padding: 12px;
     font-family: 'Consolas', monospace;
+    outline: none;
+}
+
+textarea:focus {
+    border-color: #667eea;
 }
 
 /* Button Styling */
@@ -69,10 +102,11 @@ textarea, iframe {
     display: flex;
     gap: 10px;
     margin-top: 15px;
+    flex-wrap: wrap;
 }
 
 button {
-    padding: 10px 15px;
+    padding: 10px 18px;
     border: none;
     border-radius: 6px;
     cursor: pointer;
@@ -80,25 +114,27 @@ button {
     display: flex;
     align-items: center;
     gap: 8px;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
 }
 
-/* 1. Run Button - Green */
+/* 1. Run Button - Static Green */
 .btn-run {
     background-color: #28a745;
     color: white;
 }
 .btn-run:hover {
     background-color: #218838;
+    transform: translateY(-1px);
 }
 
-/* 2. Clear Button - Red */
+/* 2. Clear Button - Static Red */
 .btn-clear {
     background-color: #dc3545;
     color: white;
 }
 .btn-clear:hover {
     background-color: #c82333;
+    transform: translateY(-1px);
 }
 
 /* 3. Adaptive Buttons (Download & Preview) */
@@ -107,7 +143,8 @@ button {
     color: var(--adaptive-text);
 }
 .btn-adaptive:hover {
-    filter: brightness(0.9);
+    background-color: var(--adaptive-hover);
+    transform: translateY(-1px);
 }
 
 .theme-toggle {
@@ -118,4 +155,8 @@ button {
     height: 40px;
     justify-content: center;
     border-radius: 50%;
+}
+
+.theme-toggle:hover {
+    background: rgba(255,255,255,0.1);
 }
