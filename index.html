@@ -4,63 +4,93 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DaMuazCode - Online Code Editor</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <header class="header">
-        <div class="logo"><i class="fas fa-bolt"></i> DaMuazCode</div>
-        <nav class="controls">
-            <button class="theme-toggle" id="themeToggle" title="Switch Theme">
-                <i class="fas fa-moon" id="themeIcon"></i>
-            </button>
-        </nav>
-    </header>
+<body class="dark">
 
-    <main class="container">
-        <section class="editor-panel">
-            <div class="panel-top">
-                <h2 class="panel-header">Code Editor</h2>
-                <select id="languageSelect" class="lang-dropdown">
-                    <option value="html">HTML/CSS/JS</option>
-                    <option value="javascript">JavaScript</option>
-                    <option value="python">Python</option>
-                </select>
+<header>
+    <div class="logo">
+        <i class="fa-solid fa-code"></i> DaMuazCode
+    </div>
+    
+    <div class="controls">
+    <button id="themeToggle" class="btn-icon">
+        <i class="fa-solid fa-moon" id="themeIcon"></i>
+    </button>
+    <button onclick="openNewWindow()" class="btn-preview">
+        <i class="fa-solid fa-up-right-from-square"></i> <span>Open Preview</span>
+    </button>
+    <button onclick="runCode()" class="btn-run">
+        <i class="fa-solid fa-play"></i> <span>Run</span>
+    </button>
+    <button onclick="saveProject()" class="btn-save">
+        <i class="fa-solid fa-file-zipper"></i> <span>Save ZIP</span>
+    </button>
+</div>
+</header>
+
+<div class="container">
+    <div class="editor-section">
+        <div class="tab-bar">
+            <div class="tab active" data-lang="html"><i class="fa-brands fa-html5"></i> index.html</div>
+            <div class="tab" data-lang="css"><i class="fa-brands fa-css3-alt"></i> style.css</div>
+            <div class="tab" data-lang="js"><i class="fa-brands fa-js"></i> script.js</div>
+        </div>
+        
+        <div class="code-area">
+            <textarea id="htmlCode" spellcheck="false" class="editor-box"><h1>Hello World</h1>
+<button id="magicBtn">Click Me</button></textarea>
+
+            <textarea id="cssCode" spellcheck="false" class="editor-box" style="display:none;">/* CSS */
+body { 
+    background: #121212; 
+    color: #fff; 
+    display: grid; 
+    place-items: center; 
+    min-height: 100vh; 
+    font-family: sans-serif; 
+}
+button { 
+    padding: 12px 24px; 
+    cursor: pointer; 
+    border-radius: 8px; 
+    border: none; 
+    background: #388bfd; 
+    color: white; 
+    font-weight: bold;
+}</textarea>
+
+            <textarea id="jsCode" spellcheck="false" class="editor-box" style="display:none;">// JS
+document.getElementById('magicBtn').onclick = () => {
+    console.log('Magic button was clicked!');
+    alert('Code is running perfectly!');
+};</textarea>
+
+            <div class="status-bar">
+                <span><i class="fa-solid fa-bars-staggered"></i> Line <span id="currentLine">1</span></span>
+                <span id="langDisplay">HTML</span>
             </div>
+        </div>
+    </div>
 
-            <textarea id="codeEditor" spellcheck="false"><!DOCTYPE html>
-<html>
-<head>
-    <style>h1{color: #667eea; font-family: sans-serif;}</style>
-</head>
-<body>
-    <h1>Hello DaMuazCode!</h1>
-    <p>Edit this code and hit Run.</p>
-</body>
-</html></textarea>
-            
-            <div class="button-group">
-                <button id="runBtn" class="btn-run">
-                    <i class="fas fa-play"></i> Run Code
-                </button>
-                <button id="clearBtn" class="btn-clear">
-                    <i class="fas fa-eraser"></i> Clear
-                </button>
-                <button id="downloadBtn" class="btn-adaptive">
-                    <i class="fas fa-download"></i> Download
-                </button>
-                <button id="previewBtn" class="btn-adaptive">
-                    <i class="fas fa-external-link-alt"></i> Preview
-                </button>
+    <div class="output-section">
+        <iframe id="output" title="Preview"></iframe>
+        
+        <div id="console-panel" class="console-panel">
+            <div class="console-header">
+                <span><i class="fa-solid fa-terminal"></i> Console</span>
+                <button onclick="clearConsole()" class="btn-clear-console">Clear</button>
             </div>
-        </section>
+            <div id="console-logs" class="console-logs"></div>
+        </div>
+    </div>
+</div>
 
-        <section class="output-panel">
-            <h2 class="panel-header">Output</h2>
-            <iframe id="output"></iframe>
-        </section>
-    </main>
-
-    <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
