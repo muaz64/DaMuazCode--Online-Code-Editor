@@ -6,7 +6,7 @@
 
 /* CSS Variables for Theme Toggling */
 :root {
-    --bg-gradient: linear-gradient(135deg, #1e202b 0%, #140c1b 100%);
+    --bg-gradient: linear-gradient(135deg, #1e202b 0%, #010102 100%);
     --panel-bg: rgba(255, 255, 255, 0.95);
     --text-color: #333;
     --adaptive-btn: #2d3748; /* Dark mode buttons */
