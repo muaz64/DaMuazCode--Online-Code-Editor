@@ -11,28 +11,31 @@
     <header class="header">
         <div class="logo"><i class="fas fa-bolt"></i> DaMuazCode</div>
         <nav class="controls">
-            <button class="theme-toggle" id="themeToggle">
+            <button class="theme-toggle" id="themeToggle" title="Switch Theme">
                 <i class="fas fa-moon" id="themeIcon"></i>
             </button>
-            <select id="languageSelect">
-                <option value="html">HTML/CSS/JS</option>
-                <option value="javascript">JavaScript</option>
-                <option value="python">Python</option>
-            </select>
         </nav>
     </header>
 
     <main class="container">
         <section class="editor-panel">
-            <h2 class="panel-header">Code Editor</h2>
+            <div class="panel-top">
+                <h2 class="panel-header">Code Editor</h2>
+                <select id="languageSelect" class="lang-dropdown">
+                    <option value="html">HTML/CSS/JS</option>
+                    <option value="javascript">JavaScript</option>
+                    <option value="python">Python</option>
+                </select>
+            </div>
+
             <textarea id="codeEditor" spellcheck="false"><!DOCTYPE html>
 <html>
 <head>
-    <style>h1{color: #667eea;}</style>
+    <style>h1{color: #667eea; font-family: sans-serif;}</style>
 </head>
 <body>
     <h1>Hello DaMuazCode!</h1>
-    <p>Try the buttons below.</p>
+    <p>Edit this code and hit Run.</p>
 </body>
 </html></textarea>
             
