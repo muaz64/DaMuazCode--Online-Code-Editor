@@ -1,81 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DaMuazCode - Online Code Editor</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="dark">
-<header>
-    <div class="logo"><i class="fa-solid fa-code"></i> DaMuazCode</div>
-    <div class="header-controls">
-        <button id="themeToggle" class="btn-icon" title="Toggle Theme">
-            <i class="fa-solid fa-moon" id="themeIcon"></i>
-        </button>
-    </div>
-</header>
 
-<div class="container">
-    <div class="editor-section">
-        <div class="toolbar">
-            <div class="tab-bar">
-                <div class="tab active" data-lang="html"><i class="fa-brands fa-html5"></i> index.html</div>
-                <div class="tab" data-lang="css"><i class="fa-brands fa-css3-alt"></i> style.css</div>
-                <div class="tab" data-lang="js"><i class="fa-brands fa-js"></i> script.js</div>
-            </div>
-            <div class="action-bar">
-                <button onclick="runCode()" class="btn-run" title="Run Code"><i class="fa-solid fa-play"></i></button>
-                <button onclick="openNewWindow()" class="btn-preview" title="Open Preview Window"><i class="fa-solid fa-up-right-from-square"></i></button>
-                <button onclick="saveProject()" class="btn-save" title="Save ZIP"><i class="fa-solid fa-file-zipper"></i></button>
-                <button onclick="resetProject()" class="btn-reset" title="Reset All"><i class="fa-solid fa-trash-can"></i></button>
+<body class="dark">
+    <div class="glow-bg"></div>
+
+    <header class="glass">
+        <div class="header-left">
+            <div class="logo">
+                <div class="logo-box"><i class="fa-solid fa-code"></i></div>
+                <span>DaMuazCode</span>
             </div>
         </div>
-        
-        <div class="code-area">
-            <textarea id="htmlCode" spellcheck="false" class="editor-box"></textarea>
-            <textarea id="cssCode" spellcheck="false" class="editor-box" style="display:none;"></textarea>
-            <textarea id="jsCode" spellcheck="false" class="editor-box" style="display:none;"></textarea>
 
-            <div class="status-bar">
-                <div>
-                    <span>Line <span id="currentLine">1</span></span>
-                    <span id="langDisplay" style="margin-left: 10px; opacity: 0.7;">HTML</span>
+        <div class="project-title-container">
+            <div class="project-title" contenteditable="true" spellcheck="false">Untitled_Project</div>
+        </div>
+
+        <div class="header-right">
+            <div class="theme-switch-wrapper">
+                <label class="theme-switch" for="checkbox">
+                    <input type="checkbox" id="checkbox" />
+                    <div class="slider">
+                        <i class="fa-solid fa-sun"></i>
+                        <i class="fa-solid fa-moon"></i>
+                        <div class="ball"></div>
+                    </div>
+                </label>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <section class="editor-pane glass">
+            <div class="editor-nav">
+                <div class="tabs">
+                    <button class="tab active" data-lang="html">
+                        <i class="fa-brands fa-html5"></i> index.html
+                    </button>
+                    <button class="tab" data-lang="css">
+                        <i class="fa-brands fa-css3-alt"></i> style.css
+                    </button>
+                    <button class="tab" data-lang="js">
+                        <i class="fa-brands fa-js"></i> script.js
+                    </button>
                 </div>
-                <button onclick="copyCurrentCode()" class="btn-copy" id="copyBtn">
-                    <i class="fa-solid fa-copy"></i> <span>Copy</span>
+                <div class="action-pills">
+                    <button onclick="runCode()" class="pill run" title="Run Code (Ctrl+Enter)">
+                        <i class="fa-solid fa-play"></i> Run
+                    </button>
+                    <button onclick="openNewWindow()" class="pill preview" title="External Preview">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </button>
+                    <button onclick="saveProject()" class="pill save" title="Download ZIP">
+                        <i class="fa-solid fa-download"></i>
+                    </button>
+                    <button onclick="resetProject()" class="pill reset" title="Reset Project">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="editor-viewport">
+                <div class="editor-wrapper active" id="wrap-html">
+                    <div class="gutter"></div>
+                    <textarea id="htmlCode" spellcheck="false" placeholder=""></textarea>
+                </div>
+                <div class="editor-wrapper" id="wrap-css">
+                    <div class="gutter"></div>
+                    <textarea id="cssCode" spellcheck="false" placeholder="/* Write CSS here */"></textarea>
+                </div>
+                <div class="editor-wrapper" id="wrap-js">
+                    <div class="gutter"></div>
+                    <textarea id="jsCode" spellcheck="false" placeholder="// Write JavaScript here"></textarea>
+                </div>
+            </div>
+
+            <div class="editor-footer">
+                <div class="footer-status">
+                    <span id="langDisplay">HTML</span>
+                </div>
+                <button onclick="copyCurrentCode()" id="copyBtn" class="copy-pill">
+                    <i class="fa-solid fa-copy"></i> <span>Copy Code</span>
                 </button>
             </div>
-        </div>
-    </div>
+        </section>
 
-    <div class="output-section">
-        <iframe id="output" title="Preview"></iframe>
-        <div id="console-panel" class="console-panel">
-            <div class="console-header">
-                <span><i class="fa-solid fa-terminal"></i> Console</span>
-                <button onclick="clearConsole()" class="btn-clear-console">Clear</button>
+        <section class="output-pane glass">
+            <div class="preview-frame">
+                <iframe id="output"></iframe>
             </div>
-            <div id="console-logs" class="console-logs"></div>
+            <div class="console-box">
+                <div class="console-nav">
+                    <span><i class="fa-solid fa-terminal"></i> Console Output</span>
+                    <button onclick="clearConsole()" class="clear-btn">Clear</button>
+                </div>
+                <div id="console-logs" class="logs"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bottom-bar glass">
+        <div class="footer-left">
+            Developed by <strong>Muaz</strong> &copy; 2026
         </div>
-    </div>
-</div>
+        <div class="footer-right">
+            <a href="https://github.com/muaz64" title="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/muaz-muhammad-ba88a3207/" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="https://muazmd.netlify.app/" title="Portfolio"><i class="fa-solid fa-globe"></i></a>
+        </div>
+    </footer>
 
-<footer class="main-footer">
-    <div class="footer-left">Created by <strong>Muaz</strong> &copy; 2024</div>
-    <div class="footer-right">
-        <span class="footer-span">Connect and Collaborate</span>
-        <a href="#"><i class="fa-brands fa-github"></i></a>
-        <a href="#"><i class="fa-solid fa-user-tie"></i></a>
-        <a href="#"><i class="fa-brands fa-facebook"></i></a>
-    </div>
-</footer>
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
+
 </html>
