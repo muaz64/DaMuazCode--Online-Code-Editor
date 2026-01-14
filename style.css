@@ -15,7 +15,7 @@ body.light {
 }
 
 * {
-  margin: 0 1px;
+  margin: 0;
   padding: 2px;
   box-sizing: border-box;
 }
@@ -88,7 +88,7 @@ button {
 .container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  height: calc(100vh - 60px);
+  height: calc(100vh - 100px);
 }
 
 @media (max-width: 850px) {
@@ -199,3 +199,45 @@ iframe {
   justify-content: space-between;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
+footer {
+    background: var(--bg-header);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 10px 20px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 50px; /* Adjusting height for a slim look */
+    z-index: 100;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-size: 0.85rem;
+}
+
+.footer-content p {
+    color: var(--text-main);
+    opacity: 0.8;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.social-links a {
+    color: var(--text-main);
+    font-size: 1.1rem;
+    transition: color 0.2s, transform 0.2s;
+    text-decoration: none;
+}
+
+.social-links a:hover {
+    color: #58a6ff;
+    transform: translateY(-2px);
+}
+

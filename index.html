@@ -19,19 +19,22 @@
     </div>
     
     <div class="controls">
-    <button id="themeToggle" class="btn-icon">
-        <i class="fa-solid fa-moon" id="themeIcon"></i>
-    </button>
-    <button onclick="openNewWindow()" class="btn-preview">
-        <i class="fa-solid fa-up-right-from-square"></i> <span>Open Preview</span>
-    </button>
-    <button onclick="runCode()" class="btn-run">
-        <i class="fa-solid fa-play"></i> <span>Run</span>
-    </button>
-    <button onclick="saveProject()" class="btn-save">
-        <i class="fa-solid fa-file-zipper"></i> <span>Save ZIP</span>
-    </button>
-</div>
+        <button id="themeToggle" class="btn-icon" title="Toggle Theme">
+            <i class="fa-solid fa-moon" id="themeIcon"></i>
+        </button>
+        <button onclick="openNewWindow()" class="btn-preview">
+            <i class="fa-solid fa-up-right-from-square"></i> <span>Preview</span>
+        </button>
+        <button onclick="runCode()" class="btn-run">
+            <i class="fa-solid fa-play"></i> <span>Run</span>
+        </button>
+        <button onclick="saveProject()" class="btn-save">
+            <i class="fa-solid fa-file-zipper"></i> <span>Save ZIP</span>
+        </button>
+        <button onclick="resetProject()" class="btn-reset">
+            <i class="fa-solid fa-trash-can"></i> <span>Reset</span>
+        </button>
+    </div>
 </header>
 
 <div class="container">
@@ -43,33 +46,9 @@
         </div>
         
         <div class="code-area">
-            <textarea id="htmlCode" spellcheck="false" class="editor-box"><h1>Hello World</h1>
-<button id="magicBtn">Click Me</button></textarea>
-
-            <textarea id="cssCode" spellcheck="false" class="editor-box" style="display:none;">/* CSS */
-body { 
-    background: #121212; 
-    color: #fff; 
-    display: grid; 
-    place-items: center; 
-    min-height: 100vh; 
-    font-family: sans-serif; 
-}
-button { 
-    padding: 12px 24px; 
-    cursor: pointer; 
-    border-radius: 8px; 
-    border: none; 
-    background: #388bfd; 
-    color: white; 
-    font-weight: bold;
-}</textarea>
-
-            <textarea id="jsCode" spellcheck="false" class="editor-box" style="display:none;">// JS
-document.getElementById('magicBtn').onclick = () => {
-    console.log('Magic button was clicked!');
-    alert('Code is running perfectly!');
-};</textarea>
+            <textarea id="htmlCode" spellcheck="false" class="editor-box"></textarea>
+            <textarea id="cssCode" spellcheck="false" class="editor-box" style="display:none;"></textarea>
+            <textarea id="jsCode" spellcheck="false" class="editor-box" style="display:none;"></textarea>
 
             <div class="status-bar">
                 <span><i class="fa-solid fa-bars-staggered"></i> Line <span id="currentLine">1</span></span>
@@ -90,6 +69,20 @@ document.getElementById('magicBtn').onclick = () => {
         </div>
     </div>
 </div>
+
+<footer class="main-footer">
+    <div class="footer-left">
+        <p>Created by <strong>Muaz</strong> &copy; 2024</p>
+    </div>
+    <div class="footer-center">
+        <span>Connect and Collaborate</span>
+    </div>
+    <div class="footer-right">
+        <a href="https://github.com/yourusername" target="_blank"><i class="fa-brands fa-github"></i></a>
+        <a href="https://yourportfolio.com" target="_blank"><i class="fa-solid fa-user-tie"></i></a>
+        <a href="https://facebook.com/yourusername" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+    </div>
+</footer>
 
 <script src="script.js"></script>
 </body>
