@@ -26,6 +26,7 @@ body {
   background: var(--bg-dark);
   color: var(--text-main);
   transition: 0.3s;
+  scroll-behavior: auto;
 }
 
 header {
@@ -89,6 +90,7 @@ button {
 
 .container {
   display: grid;
+  padding: 20px;
   grid-template-columns: 1fr 1fr;
   height: calc(100vh - 100px);
 }
@@ -196,16 +198,16 @@ iframe {
 }
 
 .main-footer {
-  height: 40px;
+  height: 60px;
   background: var(--bg-header);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
+  padding: 10px 20px;
   font-size: 0.8rem;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
-.footer-center {
+.footer-span {
   font-style: italic;
   color: #58a6ff;
 }
